@@ -25,7 +25,7 @@ Windows 10 / 11
 | 項目 | 最低要求 | 建議 |
 | --- | --- | --- |
 | Host OS | Windows 10 / 11 64-bit | Windows 11 64-bit |
-| CPU | Intel Core i5 / AMD Ryzen 5 等級，至少 4 核心 | 6 核心以上 |
+| CPU | Intel Core i5 / AMD Ryzen 5 等級，至少 6 核心 | 8 核心以上 |
 | RAM | 16 GB | 24–32 GB |
 | 可用磁碟空間 | 60 GB 以上 | 80 GB 以上 |
 | Storage | SSD | NVMe SSD |
@@ -144,14 +144,20 @@ Proceed with Unattended Installation
 ### 課程建議 VM 設定
 
 ```text
-CPU:    4 vCPU
+CPU:    6 vCPU
 Memory: 8192 MB (8 GB)
 ```
 
-如果你的實體電腦資源較充足，例如 24 GB 或 32 GB RAM，可以分配更多記憶體給 VM，但不是必要條件。
+如果 Host 電腦具備較充足的 CPU 資源，可以將 VM 提升到：
+
+```text
+CPU: 8 vCPU
+```
+
+如果你的實體電腦資源較充足，例如 24 GB 或 32 GB RAM，也可以分配更多記憶體給 VM，但不是必要條件。
 
 > [!WARNING]
-> 不要把實體電腦的大部分 CPU 或 RAM 全部分配給虛擬機。Windows Host 本身仍需要足夠資源正常運作。
+> 不要把實體電腦的大部分 CPU 或 RAM 全部分配給虛擬機。Windows Host 本身仍需要足夠資源正常運作。如果電腦只有 6 核心或可用執行緒有限，應依實際硬體能力降低 VM CPU 配置，而不是強制分配 6–8 vCPU。
 
 ### EFI
 
@@ -213,8 +219,10 @@ Ubuntu 22.04
 
 ```text
 Memory: 8192 MB
-Processors: 4
+Processors: 6
 ```
+
+Host 電腦資源充足時，可提高至 8 vCPU。
 
 ### 7.2 Network
 
@@ -445,7 +453,8 @@ sudo reboot
 - [ ] Ubuntu 可以連上網路
 - [ ] Terminal 可以正常開啟
 - [ ] `lsb_release -a` 顯示 Ubuntu 22.04
-- [ ] VM 配置至少為 4 vCPU / 8 GB RAM / 60 GB Disk
+- [ ] VM 建議配置為 6 vCPU / 8 GB RAM / 60 GB Disk
+- [ ] Host 資源充足時可使用 8 vCPU
 - [ ] Network 使用 NAT
 - [ ] Graphics Controller 為 VMSVGA
 - [ ] Video Memory 為 128 MB
@@ -476,12 +485,14 @@ ubuntu-22.04.5-desktop-amd64.iso
 檢查：
 
 ```text
-CPU 是否至少 4 vCPU
+CPU 是否配置約 6 vCPU
 RAM 是否至少 8 GB
-Host 是否有足夠剩餘 RAM
+Host 是否有足夠剩餘 CPU 與 RAM
 VM 是否放在 SSD
 CPU Virtualization 是否啟用
 ```
+
+如果 Host CPU 資源足夠，可以嘗試提高到 8 vCPU；如果 Host 本身資源有限，則不要為了追求較高 vCPU 數而讓 Windows Host 缺乏資源。
 
 ### Q4：Gazebo / RViz 之後出現黑畫面或顯示異常？
 
