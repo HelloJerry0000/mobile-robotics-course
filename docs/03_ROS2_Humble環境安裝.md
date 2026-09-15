@@ -31,7 +31,7 @@ ROS 2 Humble 本身安裝在 `/opt/ros/humble/`，最後形成：
        ↓
 ~/turtlebot3_ws
        ↓
-~/mobile_robotics_ws
+~/mobile_robototics_ws
 ```
 
 ---
@@ -269,6 +269,30 @@ sudo apt install -y 'ros-humble-gazebo-*'
 gazebo --version
 ```
 
+本課程使用 **Gazebo Classic / Gazebo 11**。安裝完成後，除了 ROS 2 環境，也要載入 Gazebo Classic 自己的環境設定：
+
+```bash
+source /opt/ros/humble/setup.bash
+source /usr/share/gazebo/setup.bash
+```
+
+確認 Gazebo setup 檔存在：
+
+```bash
+ls -l /usr/share/gazebo/setup.bash
+gazebo --version
+```
+
+將 Gazebo 環境加入 `~/.bashrc`，避免開新 Terminal 時遺漏：
+
+```bash
+grep -qxF 'source /usr/share/gazebo/setup.bash' ~/.bashrc || \
+  echo 'source /usr/share/gazebo/setup.bash' >> ~/.bashrc
+```
+
+> [!NOTE]
+> Gazebo Classic 啟動時可能顯示 End-of-Life 提示，這是版本生命週期通知，不代表啟動失敗。
+
 ---
 
 ## 12. 安裝 Turtlesim
@@ -434,6 +458,7 @@ source ~/.bashrc
 
 ```bash
 source /opt/ros/humble/setup.bash
+source /usr/share/gazebo/setup.bash
 source ~/turtlebot3_ws/install/setup.bash
 source ~/mobile_robotics_ws/install/setup.bash
 export TURTLEBOT3_MODEL=burger
@@ -442,6 +467,18 @@ export TURTLEBOT3_MODEL=burger
 ---
 
 ## 23. 啟動 TurtleBot3 Simulation 測試
+
+先確認目前 Terminal 已載入完整課程環境：
+
+```bash
+source /opt/ros/humble/setup.bash
+source /usr/share/gazebo/setup.bash
+source ~/turtlebot3_ws/install/setup.bash
+source ~/mobile_robotics_ws/install/setup.bash
+export TURTLEBOT3_MODEL=burger
+```
+
+再啟動：
 
 ```bash
 printenv ROS_DISTRO
@@ -494,6 +531,7 @@ bash scripts/environment_check.sh
 - [ ] `demo_nodes_py`
 - [ ] RViz2
 - [ ] Gazebo Classic / Gazebo 11
+- [ ] `/usr/share/gazebo/setup.bash` 已載入
 - [ ] Turtlesim
 - [ ] `colcon` / `rosdep`
 - [ ] `~/turtlebot3_ws`
@@ -544,7 +582,30 @@ cd ~/mobile_robotics_ws
 colcon build --symlink-install
 ```
 
-### Q6：Gazebo 黑畫面或無法啟動
+### Q6：Gazebo 出現 `Unable to find shader lib` / `GAZEBO_RESOURCE_PATH` 提示
+
+先確認 Gazebo Classic setup 存在並載入：
+
+```bash
+source /opt/ros/humble/setup.bash
+source /usr/share/gazebo/setup.bash
+source ~/turtlebot3_ws/install/setup.bash
+export TURTLEBOT3_MODEL=burger
+```
+
+再重新啟動 TurtleBot3：
+
+```bash
+ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+```
+
+如果這樣可以正常啟動，請確認 `~/.bashrc` 已包含：
+
+```bash
+source /usr/share/gazebo/setup.bash
+```
+
+### Q7：Gazebo 黑畫面或 GUI 無法正常顯示
 
 VirtualBox 請確認：VMSVGA、128 MB Video Memory、3D Acceleration ON，並確認 Guest Additions 已安裝。
 
@@ -556,7 +617,7 @@ VirtualBox 請確認：VMSVGA、128 MB Video Memory、3D Acceleration ON，並�
 
 ```text
 apt      → 安裝系統 / ROS 套件
-source   → 載入 ROS 環境
+source   → 載入 ROS / Gazebo / Workspace 環境
 rosdep   → 安裝 ROS package dependency
 colcon   → build ROS 2 workspace
 git      → 下載與更新程式碼
