@@ -9,18 +9,37 @@
 - 安裝基本套件
 - 從 GitHub 下載課程 Repository
 - 使用 `git pull` 更新教材
+- 分清楚「老師教材」與「自己的 ROS 2 Workspace」
 
 ---
 
-## 1. 開啟 Terminal
+## 1. Terminal 與 Terminator
 
-Ubuntu 中可使用快捷鍵：
+Ubuntu 內建 Terminal 可以使用：
 
 ```text
 Ctrl + Alt + T
 ```
 
-開啟 Terminal。
+開啟。
+
+本課程另外建議安裝 **Terminator**。之後 ROS 2 常需要同時開啟多個 Terminal 執行不同 Node，Terminator 可以方便地分割視窗。
+
+安裝：
+
+```bash
+sudo apt update
+sudo apt install -y terminator
+```
+
+啟動：
+
+```bash
+terminator
+```
+
+> [!NOTE]
+> Terminator 只是 Terminal 工具，不是 ROS 2 的必要套件。若 Terminator 暫時無法使用，Ubuntu 內建 Terminal 一樣可以完成課程操作。
 
 之後大部分 ROS 2 操作都會在 Terminal 中完成。
 
@@ -28,13 +47,13 @@ Ctrl + Alt + T
 
 ## 2. 目前位置與資料夾
 
-### 顯示目前所在位置
+顯示目前所在位置：
 
 ```bash
 pwd
 ```
 
-### 查看目前資料夾內容
+查看目前資料夾內容：
 
 ```bash
 ls
@@ -52,7 +71,7 @@ ls -l
 ls -a
 ```
 
-### 切換資料夾
+切換資料夾：
 
 ```bash
 cd <資料夾名稱>
@@ -189,13 +208,15 @@ Hello Mobile Robotics
 本課程主要使用：
 
 ```text
-GitHub
-  ↓
-保存與發布課程教材
-  ↓
-Git
-  ↓
-下載及更新教材
+老師 GitHub Repository
+        ↓
+      git clone
+        ↓
+~/mobile-robotics-course
+        ↓
+      git pull
+        ↓
+取得最新課程教材
 ```
 
 Week 00 暫時只需要熟悉：
@@ -212,22 +233,30 @@ git status
 
 ## 8. Clone 課程 Repository
 
-回到 Home：
+第一次下載前先回到 Home：
 
 ```bash
 cd ~
 ```
 
-下載課程 Repository：
+確認是否已經存在同名資料夾：
+
+```bash
+ls
+```
+
+若 `mobile-robotics-course` **不存在**，才執行：
 
 ```bash
 git clone https://github.com/HelloJerry0000/mobile-robotics-course.git
 ```
 
+若已經 clone 過，就不要再執行第二次 `git clone`。
+
 進入 Repository：
 
 ```bash
-cd mobile-robotics-course
+cd ~/mobile-robotics-course
 ```
 
 查看狀態：
@@ -238,37 +267,70 @@ git status
 
 正常情況下會看到目前位於 `main` branch。
 
+> [!IMPORTANT]
+> 如果看到 `fatal: destination path 'mobile-robotics-course' already exists and is not an empty directory.`，代表這個資料夾已經存在。通常應該進入原本的 Repository 執行 `git pull`，而不是再次 clone。
+
 ---
 
 ## 9. 更新課程教材
 
-之後每次上課前，可以進入課程 Repository：
+每次上課前：
 
 ```bash
 cd ~/mobile-robotics-course
-```
-
-再執行：
-
-```bash
 git pull
 ```
 
 取得最新教材。
 
+---
+
+# 本課程的資料夾規則
+
+## 10. 老師教材與學生程式必須分開
+
+整學期請記住三個位置：
+
+```text
+~/mobile-robotics-course/    老師教材：只 clone / pull，不在這裡寫作業
+~/turtlebot3_ws/             TurtleBot3 第三方環境：由第 03 章建立
+~/mobile_robotics_ws/        學生自己的 ROS 2 Workspace：作業與 Lab 寫在這裡
+```
+
+其中學生真正會修改的是：
+
+```text
+~/mobile_robotics_ws/src/
+```
+
+例如之後可能會看到：
+
+```text
+~/mobile_robotics_ws/
+├── src/
+│   ├── hw00_turtlesim/
+│   ├── lab01_motion/
+│   └── ...
+├── build/
+├── install/
+└── log/
+```
+
 > [!IMPORTANT]
-> 建議不要直接修改課程 Repository 內的教材檔案。自己的練習程式與作業請依照作業說明放在指定位置或自己的 workspace，避免之後 `git pull` 發生衝突。
+> **不要在 `~/mobile-robotics-course` 裡建立自己的作業、ROS package 或個人 Git 專案。**
+> 課程 Repository 是老師發布教材的位置；自己的程式統一放在 `~/mobile_robotics_ws/src/`。
 
 ---
 
-## 10. 完成檢查
+## 11. 完成檢查
 
-請確認以下指令都可以正常執行：
+請確認：
 
 ```bash
 pwd
 ls
 git --version
+terminator --version
 ```
 
 以及：
@@ -276,6 +338,7 @@ git --version
 ```bash
 cd ~/mobile-robotics-course
 git status
+git pull
 ```
 
 完成後即可進入下一章：
