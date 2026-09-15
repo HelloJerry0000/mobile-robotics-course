@@ -280,4 +280,4 @@ git status
 
 完成後即可進入下一章：
 
-➡️ [03 — ROS 2 基礎](03_ROS2基礎.md)
+➡️ [03 — ROS 2 Humble 課程環境安裝](03_ROS2_Humble環境安裝.md)
