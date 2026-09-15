@@ -12,6 +12,8 @@ Week 00 是正式移動式機器人實作開始前的準備週。
 
 - 在 Ubuntu Terminal 中進行基本操作
 - 使用 Git 下載與更新課程教材
+- 使用 Terminal 安裝並載入 ROS 2 Humble 課程環境
+- 理解 `apt`、`source`、`rosdep`、`colcon` 的基本用途
 - 理解 ROS 2 Node、Topic、Publisher、Subscriber 與 Message 的基本概念
 - 執行 Talker / Listener 範例並觀察它們的通訊
 - 使用 ROS 2 CLI 找出 Node、Topic、Message type 與正在傳送的資料
@@ -22,11 +24,17 @@ Week 00 是正式移動式機器人實作開始前的準備週。
 ## 本週流程
 
 ```text
-環境確認
+Ubuntu 22.04
    ↓
 Linux Terminal
    ↓
 Git clone / git pull
+   ↓
+ROS 2 Humble 環境安裝
+   ↓
+Gazebo / TurtleBot3 / SLAM Toolbox / Nav2
+   ↓
+環境檢查
    ↓
 ROS 2 通訊概念
    ↓
@@ -43,38 +51,7 @@ HW00：自行探索 Turtlesim
 
 ---
 
-## Part 1 — 環境確認
-
-請先確認：
-
-```bash
-lsb_release -a
-```
-
-課程環境應為 Ubuntu 22.04。
-
-再執行：
-
-```bash
-printenv ROS_DISTRO
-```
-
-若 ROS 2 Humble 已正確載入，應看到：
-
-```text
-humble
-```
-
-也可以執行課程提供的環境檢查工具：
-
-```bash
-cd ~/mobile-robotics-course
-bash scripts/environment_check.sh
-```
-
----
-
-## Part 2 — Linux 與 Git
+## Part 1 — Linux 與 Git
 
 教材：
 
@@ -98,11 +75,70 @@ git status
 
 ---
 
-## Part 3 — ROS 2 基礎通訊
+## Part 2 — 安裝 ROS 2 Humble 課程環境
 
 教材：
 
-➡️ [ROS 2 基礎](../../docs/03_ROS2基礎.md)
+➡️ [ROS 2 Humble 課程環境安裝](../../docs/03_ROS2_Humble環境安裝.md)
+
+本課程不是只安裝 ROS 2 核心，還會先準備：
+
+```text
+ROS 2 Humble Desktop
+Gazebo Classic / Gazebo 11
+RViz2
+Turtlesim
+TurtleBot3
+SLAM Toolbox
+Navigation2 / Nav2
+```
+
+安裝過程會實際使用：
+
+```text
+apt
+source
+rosdep
+colcon
+git
+```
+
+這些工具後續還會持續使用，因此請理解每一步在做什麼，不要只把整段指令當成一次性的安裝流程。
+
+---
+
+## Part 3 — 環境確認
+
+安裝完成後先確認：
+
+```bash
+lsb_release -a
+printenv ROS_DISTRO
+```
+
+課程環境應為：
+
+```text
+Ubuntu 22.04
+ROS_DISTRO=humble
+```
+
+再執行課程提供的環境檢查工具：
+
+```bash
+cd ~/mobile-robotics-course
+bash scripts/environment_check.sh
+```
+
+若有 FAIL，請先排除環境問題再進入 ROS 2 通訊內容。
+
+---
+
+## Part 4 — ROS 2 基礎通訊
+
+教材：
+
+➡️ [ROS 2 基礎](../../docs/04_ROS2基礎.md)
 
 本週核心概念：
 
@@ -118,7 +154,7 @@ Subscriber
 
 ---
 
-## Part 4 — Talker / Listener
+## Part 5 — Talker / Listener
 
 Terminal 1：
 
@@ -152,7 +188,7 @@ Topic 傳送什麼 Message type？
 
 ---
 
-## Part 5 — 學會探索，而不是背答案
+## Part 6 — 學會探索，而不是背答案
 
 本週非常重要的一項能力，是面對陌生 ROS 2 系統時知道怎麼開始。
 
@@ -202,6 +238,12 @@ ros2 interface show <message_type>
 - [ ] Ubuntu 22.04 可以正常啟動
 - [ ] `git` 可以使用
 - [ ] 課程 Repository 已 clone
+- [ ] ROS 2 Humble 已安裝
+- [ ] Gazebo 可以使用
+- [ ] RViz2 可以使用
+- [ ] TurtleBot3 simulation package 已安裝
+- [ ] SLAM Toolbox 已安裝
+- [ ] Nav2 已安裝
 - [ ] `ros2` 指令可以使用
 - [ ] Talker / Listener 可以正常通訊
 - [ ] 知道 Node、Topic、Publisher、Subscriber、Message 的基本關係
