@@ -1,30 +1,17 @@
-# HW00 — Turtlesim Motion Control
+# HW00 — Turtlesim 自主控制
 
-本作業是本課程第一個 ROS 2 程式練習。
+這是本課程第一個 ROS 2 實作作業。
 
-你需要撰寫自己的 ROS 2 Python Node，發布 `geometry_msgs/msg/Twist` 到 `/turtle1/cmd_vel`，讓 Turtlesim 中的 Turtle 自動完成指定動作。
+課堂中已介紹 ROS 2 的基本通訊概念與常用 CLI 工具。這次作業不提供控制程式或逐步解法，請利用課堂所學與自行查找的資料，探索如何透過 ROS 2 控制 Turtlesim。
 
 > [!IMPORTANT]
-> 本作業不是使用鍵盤遙控。程式啟動後，Turtle 應由你的 Node 自動完成動作。
+> 作業的重點不只是讓 Turtle 動起來，而是練習如何面對一個新的 ROS 2 系統，自己找出需要的 Node、Topic、Message 與控制方式。
 
 ---
 
-## 1. 學習目標
+## 任務
 
-完成本作業後，你應該能夠：
-
-- 建立基本 ROS 2 Python Node
-- 建立 Publisher
-- 發布 `geometry_msgs/msg/Twist`
-- 使用 `linear.x` 控制直線速度
-- 使用 `angular.z` 控制旋轉速度
-- 理解控制程式與 `/turtle1/cmd_vel` 的關係
-
----
-
-## 2. 任務
-
-請讓 Turtle 依序完成：
+請撰寫一個 **ROS 2 Python 程式**，讓 Turtlesim 中的 Turtle 在程式啟動後，自動完成以下動作：
 
 1. 向前移動一段距離
 2. 左轉約 90°
@@ -43,161 +30,67 @@ Start ●────┘
       →
 ```
 
-本作業重點是 ROS 2 Publisher 與基本運動控制概念，不要求非常精準的軌跡控制。
+本作業不要求高精度軌跡控制，只要能清楚完成上述動作即可。
 
 ---
 
-## 3. 必須使用
+## 規則
 
-Topic：
-
-```text
-/turtle1/cmd_vel
-```
-
-Message type：
-
-```text
-geometry_msgs/msg/Twist
-```
-
-主要使用欄位：
-
-```text
-linear.x
-angular.z
-```
+- 必須使用 ROS 2 Python 完成。
+- Turtle 必須由你的程式自動控制。
+- 執行過程中不可使用鍵盤遙控來完成指定軌跡。
+- 不提供 Starter Code，請自行建立程式。
+- 可以使用課堂介紹過的 ROS 2 CLI 工具探索系統。
+- 可以查閱 ROS 2 官方文件與其他學習資料。
 
 ---
 
-## 4. Starter Code
+## 建議的解題方式
 
-Starter code 放在：
+遇到不知道如何開始的情況時，不要先找完整答案。
+
+請先思考：
 
 ```text
-starter/turtle_controller.py
+有哪些 Node 正在執行？
+        ↓
+有哪些 Topic？
+        ↓
+哪些 Topic 與 Turtle 的移動有關？
+        ↓
+Topic 傳送什麼 Message？
+        ↓
+Message 裡有哪些資料？
+        ↓
+我的程式要如何與它通訊？
 ```
 
-請先複製一份到自己的工作位置再修改。
-
-Starter code 只提供基本 Node 架構，Publisher 與控制邏輯需要自行完成。
+你已經在課堂中學過觀察 ROS 2 系統所需要的基本工具，請嘗試利用這些工具自行探索。
 
 ---
 
-## 5. 執行前準備
+## 完成標準
 
-先啟動 Turtlesim：
+完成作業時，你應該能夠：
 
-```bash
-ros2 run turtlesim turtlesim_node
-```
-
-確認 Turtlesim 正常開啟後，再於另一個 Terminal 執行自己的控制程式。
-
-如果需要觀察速度命令，可另外開啟 Terminal：
-
-```bash
-ros2 topic echo /turtle1/cmd_vel
-```
-
-也可以查看 Turtle 目前的位置：
-
-```bash
-ros2 topic echo /turtle1/pose
-```
+- 執行 Turtlesim。
+- 執行自己撰寫的 ROS 2 Python 程式。
+- 不使用鍵盤操作，讓 Turtle 自動完成指定軌跡。
+- 解釋自己的程式如何透過 ROS 2 與 Turtlesim 通訊。
+- 說明你如何找到控制 Turtle 所需要的 ROS 2 資訊。
 
 ---
 
-## 6. 基本要求
+## Challenge（選做）
 
-你的程式至少需要符合：
+完成基本任務後，可以嘗試設計更複雜的自動軌跡，例如讓 Turtle 畫出一個正方形。
 
-- [ ] 使用 ROS 2 Python Node
-- [ ] 建立 `/turtle1/cmd_vel` Publisher
-- [ ] 發布 `Twist`
-- [ ] Turtle 可以自動向前移動
-- [ ] Turtle 可以自動左轉
-- [ ] 動作完成後速度歸零並停止
-- [ ] 程式執行過程不需要使用鍵盤控制 Turtle
+Challenge 為選做內容，細節與是否加分依課堂公告為準。
 
 ---
 
-## 7. 注意事項
+## 繳交方式
 
-### 不要讓 Turtle 一直移動
+繳交內容、格式、截止時間以及是否需要影片或截圖，依課堂公告為準。
 
-完成任務後請發布零速度：
-
-```text
-linear.x = 0
-angular.z = 0
-```
-
-### 注意角速度方向
-
-一般情況下：
-
-```text
-angular.z > 0  → 左轉
-angular.z < 0  → 右轉
-```
-
-### 注意 Turtlesim 邊界
-
-速度過快或時間過長可能讓 Turtle 撞到視窗邊界。
-
----
-
-## 8. Challenge（選做）
-
-完成基本題後，可以嘗試讓 Turtle 自動畫出一個正方形：
-
-```text
-┌────────┐
-│        │
-│        │
-│        │
-└────────┘
-```
-
-Challenge 不影響基本題完成與否，細節依課堂公告為準。
-
----
-
-## 9. 繳交方式
-
-繳交格式、截止時間與是否需要錄影或截圖，將依課堂公告為準。
-
-在正式繳交前，請至少自行確認：
-
-```bash
-ros2 topic list
-```
-
-可以看到 `/turtle1/cmd_vel`，且你的程式執行後 Turtle 可以完整完成指定動作。
-
----
-
-## 10. 與下一週的關係
-
-HW00 使用：
-
-```text
-Turtlesim
-   ↓
-/turtle1/cmd_vel
-   ↓
-Twist
-```
-
-下一週會進入真正的移動式機器人模擬：
-
-```text
-TurtleBot3
-   ↓
-/cmd_vel
-   ↓
-Twist
-```
-
-因此 HW00 的概念會直接延續到後續課程。
+> 請保留自己的程式碼。後續課程可能會請你說明自己的設計與 ROS 2 通訊方式。
