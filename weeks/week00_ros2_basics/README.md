@@ -187,7 +187,7 @@ ros2 interface show <message_type>
 
 你需要把本週學到的 ROS 2 通訊概念與探索方法應用到一個新的系統：**Turtlesim**。
 
-➡️ [HW00 — Turtlesim 自主控制](../../assignments/hw00_turtlesim_control/README.md)
+➡️ [HW00 — Turtlesim 自主控制](homework.md)
 
 這次作業真正想練習的是：
 
