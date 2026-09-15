@@ -85,6 +85,7 @@ ubuntu-22.04.5-desktop-amd64.iso
 檔案大小約 4.4 GB。
 
 ### 請確認下載的是正確版本
+<img width="1122" height="591" alt="image" src="https://github.com/user-attachments/assets/8f55fd0d-8cf2-4ce8-9bca-7bb729d93ac3" />
 
 ```text
 ✅ Ubuntu 22.04.5 LTS
