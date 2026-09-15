@@ -19,6 +19,8 @@
 | 模擬器 | Gazebo Classic / Gazebo 11 |
 | 視覺化 | RViz2 |
 | 機器人平台 | TurtleBot3 |
+| SLAM | SLAM Toolbox |
+| Navigation | Navigation2 / Nav2 |
 
 > [!IMPORTANT]
 > 請勿自行改用 Ubuntu 24.04、其他 Ubuntu 版本或其他 ROS 2 distribution。課程教材與程式以 **Ubuntu 22.04 + ROS 2 Humble** 為基準。
@@ -32,11 +34,17 @@ Week 00 是正式移動式機器人實作開始前的基礎週。
 本週流程：
 
 ```text
-環境確認
+Ubuntu 22.04
    ↓
 Linux Terminal
    ↓
 Git clone / git pull
+   ↓
+ROS 2 Humble 課程環境安裝
+   ↓
+Gazebo / TurtleBot3 / SLAM Toolbox / Nav2
+   ↓
+環境檢查
    ↓
 ROS 2 通訊概念
    ↓
@@ -63,6 +71,8 @@ HW00：自行探索 Turtlesim
 
 ## 第一次使用本 Repository
 
+請依照順序完成：
+
 ### 1. VirtualBox 與 Ubuntu
 
 ➡️ [01 — VirtualBox 與 Ubuntu 22.04 安裝](docs/01_VirtualBox與Ubuntu安裝.md)
@@ -71,9 +81,15 @@ HW00：自行探索 Turtlesim
 
 ➡️ [02 — Linux 與 Git 基礎](docs/02_Linux與Git基礎.md)
 
-### 3. ROS 2 基礎
+### 3. ROS 2 Humble 課程環境
 
-➡️ [03 — ROS 2 基礎](docs/03_ROS2基礎.md)
+➡️ [03 — ROS 2 Humble 課程環境安裝](docs/03_ROS2_Humble環境安裝.md)
+
+這一章會安裝後續課程需要的 ROS 2 Humble、Gazebo、RViz2、TurtleBot3、SLAM Toolbox 與 Nav2。
+
+### 4. ROS 2 基礎
+
+➡️ [04 — ROS 2 基礎](docs/04_ROS2基礎.md)
 
 ---
 
@@ -109,20 +125,25 @@ git status
 
 ## 環境檢查
 
-Clone 完成後，可以執行：
+完成第 03 章後，可以執行：
 
 ```bash
 cd ~/mobile-robotics-course
 bash scripts/environment_check.sh
 ```
 
-檢查：
+環境檢查包含：
 
 - Ubuntu 版本
-- Git
-- Python 3
-- ROS 2 指令
-- ROS distribution
+- Git / Python 3
+- ROS 2 Humble
+- RViz2
+- Gazebo
+- Turtlesim
+- TurtleBot3 simulation
+- SLAM Toolbox
+- Navigation2 / Nav2
+- TurtleBot3 model 設定
 
 ---
 
@@ -136,7 +157,8 @@ mobile-robotics-course/
 ├── docs/
 │   ├── 01_VirtualBox與Ubuntu安裝.md
 │   ├── 02_Linux與Git基礎.md
-│   └── 03_ROS2基礎.md
+│   ├── 03_ROS2_Humble環境安裝.md
+│   └── 04_ROS2基礎.md
 │
 ├── weeks/
 │   └── week00_ros2_basics/
