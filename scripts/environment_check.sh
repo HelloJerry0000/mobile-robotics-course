@@ -41,12 +41,33 @@ check_command "colcon" "colcon"
 check_command "rosdep" "rosdep"
 check_command "ROS 2 command" "ros2"
 
+# ROS apt source: current course setup uses ros2-apt-source / ros2.sources.
+if dpkg-query -W -f='${Status}' ros2-apt-source 2>/dev/null | grep -q "install ok installed"; then
+    pass "ros2-apt-source" "installed"
+else
+    warn "ros2-apt-source" "not installed; review docs section 6"
+fi
+
+if [[ -e /etc/apt/sources.list.d/ros2.sources ]]; then
+    pass "ROS apt source" "/etc/apt/sources.list.d/ros2.sources"
+else
+    warn "ROS apt source" "ros2.sources not found"
+fi
+
+ROS_SOURCE_COUNT="$(grep -RIl "packages.ros.org/ros2/ubuntu" /etc/apt/sources.list /etc/apt/sources.list.d/ 2>/dev/null | wc -l)"
+if [[ "$ROS_SOURCE_COUNT" -gt 1 ]]; then
+    warn "ROS source duplicates" "$ROS_SOURCE_COUNT files reference ROS 2 repository; check Signed-By settings"
+else
+    pass "ROS source duplicates" "no duplicate source files detected"
+fi
+
 ROS_DISTRO_VALUE="${ROS_DISTRO:-}"
 if [[ "$ROS_DISTRO_VALUE" == "humble" ]]; then pass "ROS_DISTRO" "humble"; elif [[ -n "$ROS_DISTRO_VALUE" ]]; then fail "ROS_DISTRO" "$ROS_DISTRO_VALUE (target: humble)"; else fail "ROS_DISTRO" "not set"; fi
 
+check_ros_package "Demo nodes C++" "demo_nodes_cpp"
+check_ros_package "Demo nodes Python" "demo_nodes_py"
 check_command "RViz2" "rviz2"
 check_command "Gazebo" "gazebo"
-
 check_ros_package "Turtlesim" "turtlesim"
 check_ros_package "TurtleBot3 core" "turtlebot3_node"
 check_ros_package "TurtleBot3 Gazebo" "turtlebot3_gazebo"
