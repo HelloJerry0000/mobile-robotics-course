@@ -1,6 +1,6 @@
 # 移動式機器人課程
 
-本 Repository 為 **移動式機器人（Mobile Robotics）課程**的學生教材、課堂練習與作業入口。
+本 Repository 為 **移動式機器人（Mobile Robotics）課程**的學生教材與課堂實作入口。
 
 本課程以實作為主，後續將使用 ROS 2、Gazebo、RViz 與 TurtleBot3，逐步學習機器人控制、感知、狀態估測、SLAM、定位與導航。
 
@@ -38,13 +38,17 @@ Linux Terminal
    ↓
 Git clone / git pull
    ↓
-ROS 2 Node / Topic
+ROS 2 通訊概念
+   ↓
+Node / Topic / Message
+   ↓
+Publisher / Subscriber
    ↓
 Talker / Listener
    ↓
-Turtlesim
+ROS 2 CLI 探索工具
    ↓
-HW00：Turtlesim Motion Control
+HW00：自行探索 Turtlesim
 ```
 
 ### Week 00 課堂頁面
@@ -53,7 +57,7 @@ HW00：Turtlesim Motion Control
 
 ### Week 00 作業
 
-➡️ **[HW00 — Turtlesim Motion Control](assignments/hw00_turtlesim_control/README.md)**
+➡️ **[HW00 — Turtlesim 自主控制](weeks/week00_ros2_basics/homework.md)**
 
 ---
 
@@ -137,12 +141,8 @@ mobile-robotics-course/
 ├── weeks/
 │   └── week00_ros2_basics/
 │       ├── README.md
+│       ├── homework.md
 │       └── examples/
-│
-├── assignments/
-│   └── hw00_turtlesim_control/
-│       ├── README.md
-│       └── starter/
 │
 └── scripts/
     └── environment_check.sh
@@ -152,10 +152,11 @@ mobile-robotics-course/
 
 | 資料夾 | 用途 |
 | --- | --- |
-| `docs/` | 知識與環境教材 |
-| `weeks/` | 每週課堂流程與課堂範例 |
-| `assignments/` | 作業說明與 starter code |
+| `docs/` | 環境安裝與基礎知識教材 |
+| `weeks/` | 每週課堂流程、範例與該週作業 |
 | `scripts/` | 環境檢查與課程輔助工具 |
+
+不希望學生看到的解答、評分工具、教師測試程式與尚未公開內容，不會放入此 Public Repository。
 
 ---
 
@@ -165,15 +166,27 @@ mobile-robotics-course/
 
 | 項目 | 最低要求 | 建議 |
 | --- | --- | --- |
-| CPU | Intel Core i5 / AMD Ryzen 5 等級，至少 4 核心 | 6 核心以上 |
+| CPU | Intel Core i5 / AMD Ryzen 5 等級，至少 6 核心 | 8 核心以上 |
 | RAM | 16 GB | 24–32 GB |
 | 可用磁碟空間 | 60 GB 以上 | 80 GB 以上 |
 | 儲存裝置 | SSD | NVMe SSD |
 | GPU | 可正常支援 3D Hardware Acceleration | 近年 Intel/AMD 內顯或 NVIDIA/AMD 獨顯 |
 | CPU Virtualization | Intel VT-x / AMD-V，必須啟用 | 同左 |
 
+### VirtualBox VM 建議配置
+
+```text
+CPU:     6 vCPU
+Memory:  8 GB
+Disk:    60 GB dynamic VDI
+Network: NAT
+Display: VMSVGA / 128 MB / 3D Acceleration ON
+```
+
+如果 Host 電腦具備較充足的 CPU 資源，可以將 VM 提升到 **8 vCPU**。請不要把所有 CPU 執行緒都分配給虛擬機，Windows Host 本身仍需要保留運算資源。
+
 > [!WARNING]
-> 8 GB RAM 不建議使用。電腦效能不足可能影響 Gazebo、RViz、課堂實作與作業完成。
+> 8 GB Host RAM 不建議使用。電腦效能不足可能影響 Gazebo、RViz、課堂實作與作業完成。
 
 ---
 
