@@ -467,7 +467,6 @@ bash scripts/environment_check.sh
 
 ```text
 ~/
-├── mobile-robotics-course/          ← 老師教材
 ├── turtlebot3_ws/                   ← 第三方 TurtleBot3
 │   ├── src/
 │   │   ├── DynamixelSDK/
