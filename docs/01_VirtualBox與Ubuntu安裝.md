@@ -25,15 +25,15 @@ Windows 10 / 11
 | 項目 | 最低要求 | 建議 |
 | --- | --- | --- |
 | 主機作業系統 | Windows 10 / 11 64 位元 | Windows 11 64 位元 |
-| 處理器 | Intel Core i5 / AMD Ryzen 5 等級，至少 6 核心 | 8 核心以上 |
-| 記憶體 | 16 GB | 24–32 GB |
+| 處理器 | Intel Core i5 / AMD Ryzen 5 等級 | 具備 12 個以上邏輯處理器 |
+| 記憶體 | 16 GB | 32 GB |
 | 可用磁碟空間 | 60 GB 以上 | 80 GB 以上 |
 | 儲存裝置 | SSD | NVMe SSD |
 | 顯示卡 | 支援 3D 硬體加速 | 近年 Intel/AMD 內顯或 NVIDIA/AMD 獨顯 |
 | 硬體虛擬化 | Intel VT-x / AMD-V，必須啟用 | 同左 |
 
 > [!WARNING]
-> 本課程後續會使用 Gazebo 與 RViz。獨立顯示卡不是必要條件，但顯示卡與驅動必須能正常支援 VirtualBox 的 3D 加速功能。
+> 本課程後續會使用 Gazebo 與 RViz。虛擬機的 CPU 與記憶體配置必須依實體電腦能力調整，不要把 Windows 主機本身需要的資源全部分配給虛擬機。
 
 ---
 
@@ -143,21 +143,19 @@ ISO 映像檔（ISO Image）：ubuntu-22.04.5-desktop-amd64.iso
 
 ### 課程建議虛擬機設定
 
-```text
-CPU：    6 vCPU
-記憶體：8192 MB（8 GB）
-```
-
-如果實體電腦具備較充足的 CPU 資源，可以將虛擬機提高到：
+如果實體電腦資源足夠，課程建議使用：
 
 ```text
-CPU：8 vCPU
+CPU：    10 vCPU
+記憶體：16384 MB（16 GB）
 ```
 
-如果你的實體電腦資源較充足，例如 24 GB 或 32 GB RAM，也可以分配更多記憶體給虛擬機，但不是必要條件。
+這組設定主要是讓後續 ROS 2、Gazebo、RViz 與 TurtleBot3 模擬有較充足的執行資源。
 
 > [!WARNING]
-> 不要把實體電腦的大部分 CPU 或 RAM 全部分配給虛擬機。Windows 主機本身仍需要足夠資源正常運作。如果電腦只有 6 核心或可用執行緒有限，應依實際硬體能力降低虛擬機 CPU 配置，而不是強制分配 6–8 vCPU。
+> **不要為了符合 10 vCPU / 16 GB 而把實體電腦的資源全部分配給虛擬機。**
+>
+> 如果實體電腦只有 16 GB 記憶體，請降低虛擬機記憶體配置，例如使用 8 GB；如果 CPU 的邏輯處理器數量不足，也請適度降低 vCPU 數量。Windows 主機本身仍需要保留足夠資源正常運作。
 
 ### EFI
 
@@ -211,62 +209,24 @@ Ubuntu 22.04
 └── 設定（Settings）
 ```
 
-逐項確認。
-
 ### 7.1 系統（System）
 
-建議：
+確認虛擬機的 CPU 與記憶體設定：
 
 ```text
-記憶體（Memory）：8192 MB
-處理器（Processors）：6
+記憶體（Memory）：16384 MB（16 GB）
+處理器（Processors）：10
 ```
 
-實體電腦資源充足時，可提高至 8 vCPU。
+如果實體電腦資源不足，可以依照自己的硬體降低配置。重點是要讓 Windows 主機與 Ubuntu 虛擬機都保有足夠資源。
 
-### 7.2 網路（Network）
-
-進入：
-
-```text
-設定（Settings）
-└── 網路（Network）
-```
-
-設定：
-
-```text
-網路卡 1（Adapter 1）：啟用（Enabled）
-連線方式（Attached to）：NAT
-```
-
-NAT 足以應付目前課程的 Ubuntu 更新、GitHub、ROS 2 套件下載等需求。
-
-### 7.3 顯示（Display）
-
-進入：
-
-```text
-設定（Settings）
-└── 顯示（Display）
-```
-
-建議：
-
-```text
-圖形控制器（Graphics Controller）：VMSVGA
-顯示記憶體（Video Memory）：128 MB
-啟用 3D 加速（Enable 3D Acceleration）：開啟
-```
-
-> [!IMPORTANT]
-> 後續 Gazebo 與 RViz 需要 3D 圖形顯示，因此這一頁請特別確認。
+確認完成後即可繼續 Ubuntu 安裝。
 
 ---
 
 ## 8. 啟動 Ubuntu 安裝
 
-確認 ISO、CPU、記憶體、磁碟、網路與顯示設定後，點選：
+確認 ISO、CPU、記憶體與磁碟設定後，點選：
 
 ```text
 啟動（Start）
@@ -453,12 +413,8 @@ sudo reboot
 - [ ] Ubuntu 可以連上網路
 - [ ] 終端機（Terminal）可以正常開啟
 - [ ] `lsb_release -a` 顯示 Ubuntu 22.04
-- [ ] 虛擬機建議配置為 6 vCPU / 8 GB 記憶體 / 60 GB 磁碟
-- [ ] 實體電腦資源充足時可使用 8 vCPU
-- [ ] 網路使用 NAT
-- [ ] 圖形控制器為 VMSVGA
-- [ ] 顯示記憶體為 128 MB
-- [ ] 3D 加速已開啟
+- [ ] 實體電腦資源足夠時，虛擬機使用 10 vCPU / 16 GB 記憶體
+- [ ] 虛擬硬碟大小為 60 GB
 
 如果以上皆完成，代表第一階段的 Ubuntu 虛擬機環境已建立完成。
 
@@ -482,32 +438,9 @@ ubuntu-22.04.5-desktop-amd64.iso
 
 ### Q3：虛擬機很慢？
 
-檢查：
+先確認實體電腦仍有足夠的 CPU 與記憶體可供 Windows 主機使用，並確認虛擬機存放在 SSD。分配越多 CPU 或記憶體不一定越快；如果把主機資源用盡，反而可能讓整台電腦變慢。
 
-```text
-CPU 是否配置約 6 vCPU
-記憶體是否至少 8 GB
-實體電腦是否有足夠剩餘 CPU 與記憶體
-虛擬機是否放在 SSD
-CPU 硬體虛擬化是否啟用
-```
-
-如果實體電腦 CPU 資源足夠，可以嘗試提高到 8 vCPU；如果實體電腦本身資源有限，則不要為了追求較高 vCPU 數而讓 Windows 主機缺乏資源。
-
-### Q4：Gazebo / RViz 之後出現黑畫面或顯示異常？
-
-先檢查 VirtualBox：
-
-```text
-設定（Settings）→ 顯示（Display）
-圖形控制器（Graphics Controller）= VMSVGA
-顯示記憶體（Video Memory）= 128 MB
-啟用 3D 加速（Enable 3D Acceleration）= 開啟
-```
-
-並確認 Guest Additions 與實體電腦顯示卡驅動正常。
-
-### Q5：60 GB 會立刻占滿我的硬碟嗎？
+### Q4：60 GB 會立刻占滿我的硬碟嗎？
 
 如果建立 VDI 時沒有勾選「預先配置完整大小（Pre-allocate Full Size）」，虛擬硬碟會隨實際使用量逐漸成長，而不是建立時立刻占滿 60 GB。
 
