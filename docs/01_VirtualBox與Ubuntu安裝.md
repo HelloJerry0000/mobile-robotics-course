@@ -141,21 +141,48 @@ ISO 映像檔（ISO Image）：ubuntu-22.04.5-desktop-amd64.iso
 
 ## 5. 設定 CPU 與記憶體
 
-### 課程建議虛擬機設定
+### 5.1 先確認 Windows 主機規格
 
-如果實體電腦資源足夠，課程建議使用：
+不同學生的筆電硬體不同，因此本課程 **不使用同一組 CPU / RAM 設定套用所有電腦**。
+
+在 Windows 按：
 
 ```text
-CPU：    10 vCPU
-記憶體：16384 MB（16 GB）
+Ctrl + Shift + Esc
 ```
 
-這組設定主要是讓後續 ROS 2、Gazebo、RViz 與 TurtleBot3 模擬有較充足的執行資源。
+開啟：
+
+```text
+工作管理員
+└── 效能（Performance）
+    ├── 記憶體（Memory）
+    └── CPU → 邏輯處理器（Logical processors）
+```
+
+請依照下面的表格設定 VirtualBox。
+
+### 5.2 記憶體（RAM）設定
+
+| Windows 主機 RAM | VirtualBox VM RAM |
+| --- | ---: |
+| 16 GB | **8 GB（8192 MB）** |
+| 24 GB | **12 GB（12288 MB）** |
+| 32 GB 以上 | **16 GB（16384 MB）** |
+
+### 5.3 CPU 設定
+
+| Windows CPU 邏輯處理器 | VirtualBox VM CPU |
+| --- | ---: |
+| 8 threads 以下 | **6 vCPU** |
+| 9–15 threads | **8 vCPU** |
+| 16 threads 以上 | **10 vCPU** |
+
+> [!IMPORTANT]
+> CPU 與 RAM 是 **分開依照自己的主機規格選擇**。例如主機有 32 GB RAM、12 個邏輯處理器，則設定為 **16 GB RAM + 8 vCPU**。
 
 > [!WARNING]
-> **不要為了符合 10 vCPU / 16 GB 而把實體電腦的資源全部分配給虛擬機。**
->
-> 如果實體電腦只有 16 GB 記憶體，請降低虛擬機記憶體配置，例如使用 8 GB；如果 CPU 的邏輯處理器數量不足，也請適度降低 vCPU 數量。Windows 主機本身仍需要保留足夠資源正常運作。
+> 不要把 Windows 主機的 CPU / RAM 全部分配給虛擬機。如果 VirtualBox 的資源配置指示進入紅色區域，請降低 vCPU 或記憶體設定，讓 Windows 主機本身保留足夠資源。
 
 ### EFI
 
@@ -211,14 +238,16 @@ Ubuntu 22.04
 
 ### 7.1 系統（System）
 
-確認虛擬機的 CPU 與記憶體設定：
+再次依照第 5 節的硬體對照表確認 CPU 與記憶體設定。
+
+例如：
 
 ```text
-記憶體（Memory）：16384 MB（16 GB）
-處理器（Processors）：10
+Windows 主機：32 GB RAM + 16 個以上邏輯處理器
+VirtualBox：  16384 MB（16 GB）+ 10 vCPU
 ```
 
-如果實體電腦資源不足，可以依照自己的硬體降低配置。重點是要讓 Windows 主機與 Ubuntu 虛擬機都保有足夠資源。
+若 VirtualBox 顯示資源配置進入紅色區域，請降低設定，不要勉強使用較高的 vCPU / RAM。
 
 確認完成後即可繼續 Ubuntu 安裝。
 
@@ -413,51 +442,7 @@ sudo reboot
 - [ ] Ubuntu 可以連上網路
 - [ ] 終端機（Terminal）可以正常開啟
 - [ ] `lsb_release -a` 顯示 Ubuntu 22.04
-- [ ] 實體電腦資源足夠時，虛擬機使用 10 vCPU / 16 GB 記憶體
+- [ ] 已依照主機 RAM 與 CPU 邏輯處理器數量設定 VM 資源
 - [ ] 虛擬硬碟大小為 60 GB
 
 如果以上皆完成，代表第一階段的 Ubuntu 虛擬機環境已建立完成。
-
----
-
-## 15. 常見問題
-
-### Q1：VirtualBox 找不到 64 位元 Ubuntu？
-
-先確認 CPU 硬體虛擬化是否已啟用。Windows 工作管理員的 CPU 頁面通常可以看到「虛擬化（Virtualization）」狀態。
-
-### Q2：Ubuntu ISO 顯示成 Ubuntu 22.10，怎麼辦？
-
-先確認下載的 ISO 檔名確實是：
-
-```text
-ubuntu-22.04.5-desktop-amd64.iso
-```
-
-接著在建立虛擬機時手動將「版本（Version）」選成 Ubuntu 22.04 LTS (Jammy Jellyfish) (64-bit)。
-
-### Q3：虛擬機很慢？
-
-先確認實體電腦仍有足夠的 CPU 與記憶體可供 Windows 主機使用，並確認虛擬機存放在 SSD。分配越多 CPU 或記憶體不一定越快；如果把主機資源用盡，反而可能讓整台電腦變慢。
-
-### Q4：60 GB 會立刻占滿我的硬碟嗎？
-
-如果建立 VDI 時沒有勾選「預先配置完整大小（Pre-allocate Full Size）」，虛擬硬碟會隨實際使用量逐漸成長，而不是建立時立刻占滿 60 GB。
-
----
-
-## 下一步
-
-完成 Ubuntu 22.04 環境後，下一階段將進行：
-
-```text
-Linux 終端機基礎
-      ↓
-Git
-      ↓
-下載課程 Repository
-      ↓
-ROS 2 Humble
-```
-
-請先不要自行安裝其他 ROS 2 發行版本（distribution），以免後續環境與課程教材不一致。
