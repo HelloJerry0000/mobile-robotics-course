@@ -372,7 +372,7 @@ sudo reboot
 
 ---
 
-## 13. VirtualBox 客體附加元件（Guest Additions）
+## 13. VirtualBox 客體附加元件（Guest Additions）（選做）
 
 客體附加元件（Guest Additions）可以改善虛擬機的顯示整合、視窗解析度與其他功能。
 
