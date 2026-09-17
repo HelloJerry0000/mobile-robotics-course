@@ -32,24 +32,24 @@
 
 ```text
 ~/
-├── mobile-robotics-course/     ← 老師教材，只 clone / pull
+├── mobile-robotics-course/     ← 課程教材，只 clone / pull
 ├── turtlebot3_ws/              ← TurtleBot3 第三方環境
 └── mobile_robotics_ws/         ← 學生自己的 ROS 2 Workspace
 ```
 
 ### 1. `~/mobile-robotics-course`
 
-這是老師發布的 Public GitHub Repository。學生使用：
+這是課程發布的 Public GitHub Repository。學生使用：
 
 ```bash
 git pull
 ```
 
-更新教材。**不要在這個資料夾建立自己的作業、ROS package 或個人專案。**
+更新教材。**不要在這個資料夾建立自己的 ROS package 或個人專案。**
 
 ### 2. `~/turtlebot3_ws`
 
-由環境安裝教材建立，存放 TurtleBot3、TurtleBot3 Simulation 等第三方 source packages。原則上不要放自己的作業。
+由環境安裝教材建立，存放 TurtleBot3、TurtleBot3 Simulation 等第三方 source packages。原則上不要放自己的程式。
 
 ### 3. `~/mobile_robotics_ws`
 
@@ -57,16 +57,13 @@ git pull
 
 ```text
 ~/mobile_robotics_ws/
-├── src/
-│   ├── hw00_turtlesim/
-│   ├── lab01_motion/
-│   └── ...
+├── src/        ← 自己建立的 ROS 2 packages
 ├── build/
 ├── install/
 └── log/
 ```
 
-自己的 HW、Lab 與 ROS 2 package 統一放在 `~/mobile_robotics_ws/src/`。
+自己的 ROS 2 package 統一放在 `~/mobile_robotics_ws/src/`。
 
 ---
 
@@ -92,13 +89,9 @@ ROS 2 Node / Topic / Message
 Publisher / Subscriber
    ↓
 Talker / Listener
-   ↓
-HW00：自行探索 Turtlesim
 ```
 
 ➡️ **[Week 00 — 環境、Linux、Git 與 ROS 2 基礎](weeks/week00_ros2_basics/README.md)**
-
-➡️ **[HW00 — Turtlesim 自主控制](weeks/week00_ros2_basics/homework.md)**
 
 ---
 
@@ -169,7 +162,6 @@ mobile-robotics-course/
 ├── weeks/
 │   └── week00_ros2_basics/
 │       ├── README.md
-│       ├── homework.md
 │       └── examples/
 └── scripts/
     └── environment_check.sh
