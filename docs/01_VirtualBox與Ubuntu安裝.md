@@ -7,7 +7,7 @@
 ```text
 Windows 10 / 11
 └── Oracle VirtualBox
-    └── Ubuntu 22.04.5 LTS Desktop
+    └── Ubuntu 22.04.5 LTS 桌面版
         └── 後續安裝 ROS 2 Humble、Gazebo、RViz、TurtleBot3
 ```
 
@@ -24,16 +24,16 @@ Windows 10 / 11
 
 | 項目 | 最低要求 | 建議 |
 | --- | --- | --- |
-| Host OS | Windows 10 / 11 64-bit | Windows 11 64-bit |
-| CPU | Intel Core i5 / AMD Ryzen 5 等級，至少 6 核心 | 8 核心以上 |
-| RAM | 16 GB | 24–32 GB |
+| 主機作業系統 | Windows 10 / 11 64 位元 | Windows 11 64 位元 |
+| 處理器 | Intel Core i5 / AMD Ryzen 5 等級，至少 6 核心 | 8 核心以上 |
+| 記憶體 | 16 GB | 24–32 GB |
 | 可用磁碟空間 | 60 GB 以上 | 80 GB 以上 |
-| Storage | SSD | NVMe SSD |
-| GPU | 支援 3D Hardware Acceleration | 近年 Intel/AMD 內顯或 NVIDIA/AMD 獨顯 |
-| Virtualization | Intel VT-x / AMD-V，必須啟用 | 同左 |
+| 儲存裝置 | SSD | NVMe SSD |
+| 顯示卡 | 支援 3D 硬體加速 | 近年 Intel/AMD 內顯或 NVIDIA/AMD 獨顯 |
+| 硬體虛擬化 | Intel VT-x / AMD-V，必須啟用 | 同左 |
 
 > [!WARNING]
-> 本課程後續會使用 Gazebo 與 RViz。獨立顯示卡不是必要條件，但顯示卡與驅動必須能正常支援 VirtualBox 的 3D acceleration。
+> 本課程後續會使用 Gazebo 與 RViz。獨立顯示卡不是必要條件，但顯示卡與驅動必須能正常支援 VirtualBox 的 3D 加速功能。
 
 ---
 
@@ -47,8 +47,8 @@ https://www.virtualbox.org/wiki/Downloads
 Windows 使用者請找到：
 
 ```text
-VirtualBox Platform Packages
-└── Windows hosts
+VirtualBox 平台套件（VirtualBox Platform Packages）
+└── Windows 主機（Windows hosts）
 ```
 
 點選 **Windows hosts** 下載安裝程式。
@@ -62,7 +62,7 @@ VirtualBox Platform Packages
 
 ### 完成檢查
 
-如果可以正常開啟 VirtualBox Manager，並看到建立新虛擬機的功能，即完成此步驟。
+如果可以正常開啟 VirtualBox 管理介面（VirtualBox Manager），並看到建立新虛擬機的功能，即完成此步驟。
 
 > [!NOTE]
 > 課程使用 VirtualBox 基本功能即可，不需要另外建立 VirtualBox 帳號。
@@ -73,7 +73,7 @@ VirtualBox Platform Packages
 
 請從 Ubuntu 官方網站下載：
 
-**Ubuntu 22.04.5 LTS (Jammy Jellyfish)：**  
+**Ubuntu 22.04.5 LTS（Jammy Jellyfish）：**  
 https://releases.ubuntu.com/jammy/
 
 請下載：
@@ -89,12 +89,12 @@ ubuntu-22.04.5-desktop-amd64.iso
 
 ```text
 ✅ Ubuntu 22.04.5 LTS
-✅ Desktop image
-✅ 64-bit PC (AMD64)
+✅ 桌面版（Desktop image）
+✅ 64 位元 PC（AMD64）
 
 ❌ Ubuntu 24.04
-❌ Ubuntu Server
-❌ WSL image
+❌ Ubuntu Server 伺服器版
+❌ WSL 版本
 ```
 
 > [!IMPORTANT]
@@ -107,19 +107,19 @@ ubuntu-22.04.5-desktop-amd64.iso
 開啟 VirtualBox，點選：
 
 ```text
-New / 新增
+新增（New）
 ```
 
-### 4.1 Name and Operating System
+### 4.1 名稱與作業系統（Name and Operating System）
 
 建議設定：
 
 ```text
-Name: Ubuntu 22.04
-ISO Image: ubuntu-22.04.5-desktop-amd64.iso
-Type / OS: Linux
-Distribution: Ubuntu
-Version: Ubuntu 22.04 LTS (Jammy Jellyfish) (64-bit)
+名稱（Name）：Ubuntu 22.04
+ISO 映像檔（ISO Image）：ubuntu-22.04.5-desktop-amd64.iso
+類型 / 作業系統（Type / OS）：Linux
+發行版本（Distribution）：Ubuntu
+版本（Version）：Ubuntu 22.04 LTS (Jammy Jellyfish) (64-bit)
 ```
 
 ### 非常重要：取消自動安裝
@@ -127,7 +127,7 @@ Version: Ubuntu 22.04 LTS (Jammy Jellyfish) (64-bit)
 如果畫面出現：
 
 ```text
-Proceed with Unattended Installation
+進行無人值守安裝（Proceed with Unattended Installation）
 ```
 
 請 **取消勾選**。
@@ -135,29 +135,29 @@ Proceed with Unattended Installation
 我們會使用 Ubuntu 標準安裝畫面完成安裝，這樣每位同學看到的流程會與教材一致。
 
 > [!WARNING]
-> VirtualBox 有時可能根據 ISO 自動判斷出錯誤的 Ubuntu Version，例如 Ubuntu 22.10。即使 ISO 本身是 22.04.5，也請手動確認 Version 顯示為 **Ubuntu 22.04 LTS (Jammy Jellyfish) (64-bit)**。
+> VirtualBox 有時可能根據 ISO 自動判斷成錯誤的 Ubuntu 版本，例如 Ubuntu 22.10。即使 ISO 本身是 22.04.5，也請手動確認版本顯示為 **Ubuntu 22.04 LTS (Jammy Jellyfish) (64-bit)**。
 
 ---
 
 ## 5. 設定 CPU 與記憶體
 
-### 課程建議 VM 設定
+### 課程建議虛擬機設定
 
 ```text
-CPU:    6 vCPU
-Memory: 8192 MB (8 GB)
+CPU：    6 vCPU
+記憶體：8192 MB（8 GB）
 ```
 
-如果 Host 電腦具備較充足的 CPU 資源，可以將 VM 提升到：
+如果實體電腦具備較充足的 CPU 資源，可以將虛擬機提高到：
 
 ```text
-CPU: 8 vCPU
+CPU：8 vCPU
 ```
 
-如果你的實體電腦資源較充足，例如 24 GB 或 32 GB RAM，也可以分配更多記憶體給 VM，但不是必要條件。
+如果你的實體電腦資源較充足，例如 24 GB 或 32 GB RAM，也可以分配更多記憶體給虛擬機，但不是必要條件。
 
 > [!WARNING]
-> 不要把實體電腦的大部分 CPU 或 RAM 全部分配給虛擬機。Windows Host 本身仍需要足夠資源正常運作。如果電腦只有 6 核心或可用執行緒有限，應依實際硬體能力降低 VM CPU 配置，而不是強制分配 6–8 vCPU。
+> 不要把實體電腦的大部分 CPU 或 RAM 全部分配給虛擬機。Windows 主機本身仍需要足夠資源正常運作。如果電腦只有 6 核心或可用執行緒有限，應依實際硬體能力降低虛擬機 CPU 配置，而不是強制分配 6–8 vCPU。
 
 ### EFI
 
@@ -170,24 +170,24 @@ CPU: 8 vCPU
 建議：
 
 ```text
-Disk Size: 60 GB
-Disk Type: VDI
+磁碟大小（Disk Size）：60 GB
+磁碟類型（Disk Type）：VDI
 ```
 
 如果畫面有以下選項：
 
 ```text
-Pre-allocate Full Size
-Split Disk Into 2 GB Parts
+預先配置完整大小（Pre-allocate Full Size）
+分割成每個 2 GB 的檔案（Split Disk Into 2 GB Parts）
 ```
 
 兩者都維持 **未勾選**。
 
 這樣建立的是動態配置的虛擬硬碟：設定 60 GB 代表虛擬硬碟最多可以成長到約 60 GB，而不是建立當下立即占滿 60 GB 實體空間。
 
-### VM 儲存位置
+### 虛擬機儲存位置
 
-如果電腦有 C:、D: 等多個磁碟，建議選擇 **可用空間較大的 SSD** 存放 VM。
+如果電腦有 C:、D: 等多個磁碟，建議選擇 **可用空間較大的 SSD** 存放虛擬機。
 
 例如：
 
@@ -196,67 +196,67 @@ D:\VirtualBox VMs\Ubuntu 22.04\
 ```
 
 > [!IMPORTANT]
-> 即使使用動態 VDI，實體磁碟仍必須保留足夠空間讓 VM 後續成長。
+> 即使使用動態 VDI，實體磁碟仍必須保留足夠空間讓虛擬機後續成長。
 
 ---
 
 ## 7. 建立完成後檢查 VirtualBox 設定
 
-建立 VM 後，先不要急著開始安裝 Ubuntu。
+建立虛擬機後，先不要急著開始安裝 Ubuntu。
 
 選取：
 
 ```text
 Ubuntu 22.04
-└── Settings
+└── 設定（Settings）
 ```
 
 逐項確認。
 
-### 7.1 System
+### 7.1 系統（System）
 
 建議：
 
 ```text
-Memory: 8192 MB
-Processors: 6
+記憶體（Memory）：8192 MB
+處理器（Processors）：6
 ```
 
-Host 電腦資源充足時，可提高至 8 vCPU。
+實體電腦資源充足時，可提高至 8 vCPU。
 
-### 7.2 Network
+### 7.2 網路（Network）
 
 進入：
 
 ```text
-Settings
-└── Network
+設定（Settings）
+└── 網路（Network）
 ```
 
 設定：
 
 ```text
-Adapter 1: Enabled
-Attached to: NAT
+網路卡 1（Adapter 1）：啟用（Enabled）
+連線方式（Attached to）：NAT
 ```
 
 NAT 足以應付目前課程的 Ubuntu 更新、GitHub、ROS 2 套件下載等需求。
 
-### 7.3 Display
+### 7.3 顯示（Display）
 
 進入：
 
 ```text
-Settings
-└── Display
+設定（Settings）
+└── 顯示（Display）
 ```
 
 建議：
 
 ```text
-Graphics Controller: VMSVGA
-Video Memory: 128 MB
-Enable 3D Acceleration: ON
+圖形控制器（Graphics Controller）：VMSVGA
+顯示記憶體（Video Memory）：128 MB
+啟用 3D 加速（Enable 3D Acceleration）：開啟
 ```
 
 > [!IMPORTANT]
@@ -266,13 +266,13 @@ Enable 3D Acceleration: ON
 
 ## 8. 啟動 Ubuntu 安裝
 
-確認 ISO、CPU、RAM、Disk、Network 與 Display 設定後，點選：
+確認 ISO、CPU、記憶體、磁碟、網路與顯示設定後，點選：
 
 ```text
-Start
+啟動（Start）
 ```
 
-VM 會從 Ubuntu ISO 開機。
+虛擬機會從 Ubuntu ISO 開機。
 
 進入 Ubuntu 安裝畫面後，選擇安裝 Ubuntu。
 
@@ -281,51 +281,51 @@ VM 會從 Ubuntu ISO 開機。
 ```text
 啟動 Ubuntu ISO
       ↓
-Try or Install Ubuntu
+試用或安裝 Ubuntu（Try or Install Ubuntu）
       ↓
-Install Ubuntu
+安裝 Ubuntu（Install Ubuntu）
       ↓
-Keyboard Layout
+鍵盤配置（Keyboard Layout）
       ↓
-Installation Options
+安裝選項（Installation Options）
       ↓
-Disk / Installation Type
+磁碟 / 安裝類型（Disk / Installation Type）
       ↓
-Time Zone
+時區（Time Zone）
       ↓
 建立使用者帳號
       ↓
-Install
+安裝（Install）
       ↓
-Restart
+重新啟動（Restart）
 ```
 
 ---
 
 ## 9. Ubuntu 安裝選項
 
-### 9.1 Keyboard
+### 9.1 鍵盤配置（Keyboard）
 
-依照自己的鍵盤選擇即可。一般英文鍵盤可以使用預設 English (US)。
+依照自己的鍵盤選擇即可。一般英文鍵盤可以使用預設的英文（美式）（English US）。
 
 ### 9.2 安裝模式
 
-若安裝畫面提供一般安裝 / Normal installation，建議使用一般桌面安裝選項。
+若安裝畫面提供一般安裝（Normal installation），建議使用一般桌面安裝選項。
 
 如果有下載更新或第三方軟體選項，依當下網路環境決定即可；課程後續仍會統一使用 `apt` 更新與安裝必要套件。
 
-### 9.3 Installation Type
+### 9.3 安裝類型（Installation Type）
 
 在虛擬機裡可能看到：
 
 ```text
-Erase disk and install Ubuntu
+清除磁碟並安裝 Ubuntu（Erase disk and install Ubuntu）
 ```
 
-在本課程的 VirtualBox VM 中可以選擇此項。
+在本課程的 VirtualBox 虛擬機中可以選擇此項。
 
 > [!CAUTION]
-> 這裡的「Erase disk」指的是 **VirtualBox 建立的虛擬硬碟（VDI）**，不是你的 Windows C: 或 D: 實體硬碟。前提是你現在確實是在 VirtualBox 虛擬機的 Ubuntu 安裝畫面內操作。
+> 這裡的「清除磁碟」指的是 **VirtualBox 建立的虛擬硬碟（VDI）**，不是你的 Windows C: 或 D: 實體硬碟。前提是你現在確實是在 VirtualBox 虛擬機的 Ubuntu 安裝畫面內操作。
 
 ---
 
@@ -334,10 +334,10 @@ Erase disk and install Ubuntu
 依照 Ubuntu 安裝程式建立自己的：
 
 ```text
-Name
-Computer Name
-Username
-Password
+姓名（Name）
+電腦名稱（Computer Name）
+使用者名稱（Username）
+密碼（Password）
 ```
 
 ### 請記住自己的密碼
@@ -351,23 +351,23 @@ sudo
 Ubuntu 會要求輸入目前使用者密碼。
 
 > [!NOTE]
-> Terminal 輸入 `sudo` 密碼時，畫面不會顯示 `*` 或其他字元，這是 Linux 正常的安全設計。輸入完成後按 Enter 即可。
+> 終端機輸入 `sudo` 密碼時，畫面不會顯示 `*` 或其他字元，這是 Linux 正常的安全設計。輸入完成後按 Enter 即可。
 
 ---
 
 ## 11. 完成安裝並重新啟動
 
-安裝完成後選擇 Restart。
+安裝完成後選擇 **重新啟動（Restart）**。
 
-若重新啟動時 Ubuntu 提示移除 installation medium，可以依畫面提示按 Enter；VirtualBox 通常會處理 ISO 啟動媒體。
+若重新啟動時 Ubuntu 提示移除安裝媒體（installation medium），可以依畫面提示按 Enter；VirtualBox 通常會處理 ISO 啟動媒體。
 
-重新開機後，應該可以進入 Ubuntu 22.04 Desktop 並登入剛才建立的帳號。
+重新開機後，應該可以進入 Ubuntu 22.04 桌面並登入剛才建立的帳號。
 
 ---
 
 ## 12. 第一次進入 Ubuntu
 
-開啟 Terminal：
+開啟終端機（Terminal）：
 
 ```text
 Ctrl + Alt + T
@@ -412,18 +412,18 @@ sudo reboot
 
 ---
 
-## 13. VirtualBox Guest Additions
+## 13. VirtualBox 客體附加元件（Guest Additions）
 
-Guest Additions 可以改善虛擬機的顯示整合、視窗解析度與其他 Guest 功能。
+客體附加元件（Guest Additions）可以改善虛擬機的顯示整合、視窗解析度與其他功能。
 
-Ubuntu 安裝完成後，在 VirtualBox VM 視窗上方選單找到：
+Ubuntu 安裝完成後，在 VirtualBox 虛擬機視窗上方選單找到：
 
 ```text
-Devices
-└── Insert Guest Additions CD Image...
+裝置（Devices）
+└── 插入 Guest Additions CD 映像檔（Insert Guest Additions CD Image...）
 ```
 
-若 Guest Additions 安裝過程需要編譯 kernel module，可先安裝：
+若 Guest Additions 安裝過程需要編譯核心模組（kernel module），可先安裝：
 
 ```bash
 sudo apt update
@@ -451,14 +451,14 @@ sudo reboot
 - [ ] Ubuntu 22.04.5 已完成安裝
 - [ ] Ubuntu 可以正常登入
 - [ ] Ubuntu 可以連上網路
-- [ ] Terminal 可以正常開啟
+- [ ] 終端機（Terminal）可以正常開啟
 - [ ] `lsb_release -a` 顯示 Ubuntu 22.04
-- [ ] VM 建議配置為 6 vCPU / 8 GB RAM / 60 GB Disk
-- [ ] Host 資源充足時可使用 8 vCPU
-- [ ] Network 使用 NAT
-- [ ] Graphics Controller 為 VMSVGA
-- [ ] Video Memory 為 128 MB
-- [ ] 3D Acceleration 已開啟
+- [ ] 虛擬機建議配置為 6 vCPU / 8 GB 記憶體 / 60 GB 磁碟
+- [ ] 實體電腦資源充足時可使用 8 vCPU
+- [ ] 網路使用 NAT
+- [ ] 圖形控制器為 VMSVGA
+- [ ] 顯示記憶體為 128 MB
+- [ ] 3D 加速已開啟
 
 如果以上皆完成，代表第一階段的 Ubuntu 虛擬機環境已建立完成。
 
@@ -466,9 +466,9 @@ sudo reboot
 
 ## 15. 常見問題
 
-### Q1：VirtualBox 找不到 64-bit Ubuntu？
+### Q1：VirtualBox 找不到 64 位元 Ubuntu？
 
-先確認 CPU virtualization 是否已啟用。Windows 工作管理員的 CPU 頁面通常可以看到 Virtualization / 虛擬化狀態。
+先確認 CPU 硬體虛擬化是否已啟用。Windows 工作管理員的 CPU 頁面通常可以看到「虛擬化（Virtualization）」狀態。
 
 ### Q2：Ubuntu ISO 顯示成 Ubuntu 22.10，怎麼辦？
 
@@ -478,38 +478,38 @@ sudo reboot
 ubuntu-22.04.5-desktop-amd64.iso
 ```
 
-接著在建立 VM 時手動將 Version 選成 Ubuntu 22.04 LTS (Jammy Jellyfish) (64-bit)。
+接著在建立虛擬機時手動將「版本（Version）」選成 Ubuntu 22.04 LTS (Jammy Jellyfish) (64-bit)。
 
-### Q3：VM 很慢？
+### Q3：虛擬機很慢？
 
 檢查：
 
 ```text
 CPU 是否配置約 6 vCPU
-RAM 是否至少 8 GB
-Host 是否有足夠剩餘 CPU 與 RAM
-VM 是否放在 SSD
-CPU Virtualization 是否啟用
+記憶體是否至少 8 GB
+實體電腦是否有足夠剩餘 CPU 與記憶體
+虛擬機是否放在 SSD
+CPU 硬體虛擬化是否啟用
 ```
 
-如果 Host CPU 資源足夠，可以嘗試提高到 8 vCPU；如果 Host 本身資源有限，則不要為了追求較高 vCPU 數而讓 Windows Host 缺乏資源。
+如果實體電腦 CPU 資源足夠，可以嘗試提高到 8 vCPU；如果實體電腦本身資源有限，則不要為了追求較高 vCPU 數而讓 Windows 主機缺乏資源。
 
 ### Q4：Gazebo / RViz 之後出現黑畫面或顯示異常？
 
 先檢查 VirtualBox：
 
 ```text
-Settings → Display
-Graphics Controller = VMSVGA
-Video Memory = 128 MB
-Enable 3D Acceleration = ON
+設定（Settings）→ 顯示（Display）
+圖形控制器（Graphics Controller）= VMSVGA
+顯示記憶體（Video Memory）= 128 MB
+啟用 3D 加速（Enable 3D Acceleration）= 開啟
 ```
 
-並確認 Guest Additions 與 Host 顯示卡驅動正常。
+並確認 Guest Additions 與實體電腦顯示卡驅動正常。
 
 ### Q5：60 GB 會立刻占滿我的硬碟嗎？
 
-如果建立 VDI 時沒有勾選 Pre-allocate Full Size，虛擬硬碟會隨實際使用量逐漸成長，而不是建立時立刻占滿 60 GB。
+如果建立 VDI 時沒有勾選「預先配置完整大小（Pre-allocate Full Size）」，虛擬硬碟會隨實際使用量逐漸成長，而不是建立時立刻占滿 60 GB。
 
 ---
 
@@ -518,7 +518,7 @@ Enable 3D Acceleration = ON
 完成 Ubuntu 22.04 環境後，下一階段將進行：
 
 ```text
-Linux Terminal 基礎
+Linux 終端機基礎
       ↓
 Git
       ↓
@@ -527,4 +527,4 @@ Git
 ROS 2 Humble
 ```
 
-請先不要自行安裝其他 ROS 2 distribution，以免後續環境與課程教材不一致。
+請先不要自行安裝其他 ROS 2 發行版本（distribution），以免後續環境與課程教材不一致。
