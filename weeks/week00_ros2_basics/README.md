@@ -45,8 +45,6 @@ Publisher / Subscriber
 Talker / Listener
    ↓
 ROS 2 CLI 探索工具
-   ↓
-HW00：自行探索 Turtlesim
 ```
 
 ---
@@ -217,20 +215,6 @@ ros2 interface show <message_type>
 
 ---
 
-## HW00 — Turtlesim
-
-課堂不會提供 Turtlesim 控制程式，也不會逐步示範作業解法。
-
-你需要把本週學到的 ROS 2 通訊概念與探索方法應用到一個新的系統：**Turtlesim**。
-
-➡️ [HW00 — Turtlesim 自主控制](homework.md)
-
-這次作業真正想練習的是：
-
-> 面對一個新的 ROS 2 系統，能不能自己找出它如何通訊，並利用找到的資訊完成控制任務？
-
----
-
 ## Week 00 Checkpoint
 
 離開教室前，請確認：
@@ -250,5 +234,3 @@ ros2 interface show <message_type>
 - [ ] 會使用 ROS 2 CLI 找出 Node 與 Topic
 - [ ] 會查詢 Topic 的資訊與 Message type
 - [ ] 會觀察 Topic 正在傳送的資料
-
-完成以上項目後，即可開始 HW00。
