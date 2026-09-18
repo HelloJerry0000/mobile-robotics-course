@@ -334,6 +334,7 @@ ros2 pkg list | grep slam_toolbox
 ## 15. 建立 TurtleBot3 Workspace
 
 ```bash
+cd ~
 mkdir -p ~/turtlebot3_ws/src
 cd ~/turtlebot3_ws/src
 ```
