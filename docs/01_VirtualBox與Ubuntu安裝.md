@@ -162,31 +162,33 @@ Ctrl + Shift + Esc
 
 請依照下面的表格設定 VirtualBox。
 
-### 5.2 記憶體（RAM）設定
+### 5.2 CPU / RAM 建議配置
 
-本課程以 **8 GB（8192 MB）** 作為 Ubuntu + ROS 2 + Gazebo / RViz 的建議基準。
+本課程後續會使用 **ROS 2、Gazebo Classic、RViz2、TurtleBot3、Nav2 / SLAM Toolbox、VS Code**，因此 VM 不只需要能開啟 Ubuntu，也要保留足夠資源執行模擬與開發工具。
 
-| Windows 主機 RAM | VirtualBox VM RAM |
-| --- | ---: |
-| 16 GB | **6～8 GB** |
-| 24 GB | **8 GB** |
-| 32 GB 以上 | **8 GB（建議基準）** |
-
-### 5.3 CPU 設定
-
-本課程建議先使用 **4～6 vCPU**；需要執行 Gazebo / RViz 時，主機資源足夠可使用 **6 vCPU**。
-
-| Windows CPU 邏輯處理器 | VirtualBox VM CPU |
-| --- | ---: |
-| 8 threads 以下 | **2～4 vCPU** |
-| 9–15 threads | **4 vCPU** |
-| 16 threads 以上 | **4～6 vCPU** |
+| 實體電腦規格 | VirtualBox VM 建議 | 適用情況 |
+| --- | --- | --- |
+| 16 GB RAM、約 8 threads | **8 GB RAM + 4 vCPU** | 最低可用配置 |
+| 16 GB RAM、12 threads 以上 | **8 GB RAM + 6 vCPU** | 一般課程使用 |
+| 24 GB RAM、12 threads 以上 | **12 GB RAM + 6～8 vCPU** | **推薦配置** |
+| 32 GB RAM、16 threads 以上 | **12～16 GB RAM + 8 vCPU** | Gazebo / RViz 較充裕 |
+| 32 GB 以上、高階多核心 CPU | **16 GB RAM + 8～10 vCPU** | 高規格主機，可視需求增加 |
 
 > [!IMPORTANT]
-> vCPU 並不是越多越快。VirtualBox 仍需要由 Windows 主機排程虛擬 CPU；一般課程工作先以 **8 GB RAM + 4～6 vCPU** 為基準即可。
+> **不要把 CPU 與 RAM 全部分配給虛擬機。** Windows 主機仍需要資源執行 VirtualBox、瀏覽器與其他程式。
 
-> [!WARNING]
-> 不要把 Windows 主機的 CPU / RAM 全部分配給虛擬機。如果 VirtualBox 的資源配置指示進入紅色區域，請降低 vCPU 或記憶體設定，讓 Windows 主機本身保留足夠資源。
+> [!NOTE]
+> vCPU 與 RAM 並不是越多越快。若工作負載用不到額外核心，過多 vCPU 不一定帶來效能提升。對 Gazebo / RViz 而言，VirtualBox 的 **3D acceleration 與顯示設定**也非常重要。
+
+### 5.3 本課程建議怎麼選？
+
+```text
+16 GB 主機 → VM：8 GB RAM + 4～6 vCPU
+24 GB 主機 → VM：12 GB RAM + 6～8 vCPU
+32 GB 主機 → VM：12～16 GB RAM + 8 vCPU
+```
+
+若 VirtualBox 的資源配置指示進入紅色區域，請降低 vCPU 或 RAM。
 
 ### EFI
 
@@ -245,8 +247,9 @@ Ubuntu 22.04
 再次依照第 5 節確認 CPU 與記憶體。一般建議：
 
 ```text
-RAM：8192 MB
-CPU：4～6 vCPU
+16 GB 主機 → 8 GB RAM + 4～6 vCPU
+24 GB 主機 → 12 GB RAM + 6～8 vCPU
+32 GB 主機 → 12～16 GB RAM + 8 vCPU
 ```
 
 若 VirtualBox 顯示資源配置進入紅色區域，請降低設定。
