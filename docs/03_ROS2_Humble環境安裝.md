@@ -643,9 +643,6 @@ VirtualBox 請確認：VMSVGA、128 MB Video Memory、3D Acceleration ON，並�
 
 ---
 
-## 29. 為什麼不用一鍵安裝 Script？
-
-本課程刻意讓學生親自使用：
 
 ```text
 apt      → 安裝系統 / ROS 套件
