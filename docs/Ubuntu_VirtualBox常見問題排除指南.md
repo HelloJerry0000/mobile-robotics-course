@@ -56,7 +56,59 @@ Display
 
 ---
 
-## 3. Terminal 點擊後沒有反應
+## 3. Windows 與 Ubuntu 無法複製貼上
+
+如果 Windows 可以複製文字，但無法貼到 Ubuntu（或反過來），先將 Ubuntu 虛擬機開啟，從 VirtualBox 視窗上方選單設定：
+
+```text
+裝置（Devices）
+└── 共用剪貼簿（Shared Clipboard）
+    └── 雙向（Bidirectional）
+```
+
+設定後先測試 Windows 複製一小段文字，再到 Ubuntu Terminal 使用：
+
+```text
+Ctrl + Shift + V
+```
+
+> [!IMPORTANT]
+> Ubuntu Terminal 的貼上快捷鍵通常是 **Ctrl + Shift + V**，不是 Windows 常用的 Ctrl + V。
+
+如果「雙向」已經開啟但仍無法使用，請確認 Guest Additions：
+
+```bash
+lsmod | grep vbox
+```
+
+正常情況通常可看到 `vboxguest`，視安裝方式也可能看到其他 `vbox*` 模組。
+
+若完全沒有輸出，可先安裝編譯 Guest Additions 所需套件：
+
+```bash
+sudo apt update
+sudo apt install -y build-essential dkms linux-headers-$(uname -r)
+```
+
+接著在 VirtualBox 視窗選擇：
+
+```text
+裝置（Devices）
+└── 插入 Guest Additions CD 映像檔
+    （Insert Guest Additions CD Image...）
+```
+
+依畫面完成安裝後重新啟動：
+
+```bash
+sudo reboot
+```
+
+再確認 Shared Clipboard 設為 **Bidirectional**。
+
+---
+
+## 4. Terminal 點擊後沒有反應
 
 正常情況下可使用：
 
@@ -86,7 +138,7 @@ ubuntu login:
 
 ---
 
-## 4. 登入 TTY
+## 5. 登入 TTY
 
 在：
 
@@ -113,9 +165,9 @@ vboxuser@ubuntu:~$
 
 ---
 
-## 5. 先確認系統資源
+## 6. 先確認系統資源
 
-### 5.1 檢查磁碟
+### 6.1 檢查磁碟
 
 ```bash
 df -h
@@ -130,7 +182,7 @@ Filesystem   Size  Used  Avail  Use%
 
 如果 `/` 已接近 **90～100%**，可能造成 Ubuntu 或應用程式異常。
 
-### 5.2 檢查 RAM
+### 6.2 檢查 RAM
 
 ```bash
 free -h
@@ -138,7 +190,7 @@ free -h
 
 請注意 `available` 欄位。若仍有足夠可用記憶體，問題通常不是 RAM 用盡。
 
-### 5.3 檢查失敗的系統服務
+### 6.3 檢查失敗的系統服務
 
 ```bash
 systemctl --failed
@@ -152,7 +204,7 @@ systemctl --failed
 
 ---
 
-## 6. 檢查 GNOME Terminal
+## 7. 檢查 GNOME Terminal
 
 在 TTY 輸入：
 
@@ -185,7 +237,7 @@ Failed to start GNOME Terminal Server.
 
 ---
 
-## 7. 修復 Non UTF-8 Locale
+## 8. 修復 Non UTF-8 Locale
 
 先查看目前 Locale：
 
@@ -264,7 +316,7 @@ Ctrl + Alt + T
 
 ---
 
-## 8. Terminal 修好，但 Gazebo / RViz 還是很卡
+## 9. Terminal 修好，但 Gazebo / RViz 還是很卡
 
 這通常是另一個問題，不需要繼續修改 Locale。
 
@@ -314,7 +366,7 @@ lsmod | grep vbox
 
 ---
 
-## 9. 快速排錯流程
+## 10. 快速排錯流程
 
 ```text
 Ubuntu / VirtualBox 出現問題
@@ -353,7 +405,7 @@ Ubuntu / VirtualBox 出現問題
 
 ---
 
-## 10. 本次實際案例
+## 11. 本次實際案例
 
 本次遇到的 Terminal 無法開啟，檢查後並不是：
 
