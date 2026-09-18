@@ -164,22 +164,26 @@ Ctrl + Shift + Esc
 
 ### 5.2 記憶體（RAM）設定
 
+本課程以 **8 GB（8192 MB）** 作為 Ubuntu + ROS 2 + Gazebo / RViz 的建議基準。
+
 | Windows 主機 RAM | VirtualBox VM RAM |
 | --- | ---: |
-| 16 GB | **8 GB（8192 MB）** |
-| 24 GB | **12 GB（12288 MB）** |
-| 32 GB 以上 | **16 GB（16384 MB）** |
+| 16 GB | **6～8 GB** |
+| 24 GB | **8 GB** |
+| 32 GB 以上 | **8 GB（建議基準）** |
 
 ### 5.3 CPU 設定
 
+本課程建議先使用 **4～6 vCPU**；需要執行 Gazebo / RViz 時，主機資源足夠可使用 **6 vCPU**。
+
 | Windows CPU 邏輯處理器 | VirtualBox VM CPU |
 | --- | ---: |
-| 8 threads 以下 | **6 vCPU** |
-| 9–15 threads | **8 vCPU** |
-| 16 threads 以上 | **10 vCPU** |
+| 8 threads 以下 | **2～4 vCPU** |
+| 9–15 threads | **4 vCPU** |
+| 16 threads 以上 | **4～6 vCPU** |
 
 > [!IMPORTANT]
-> CPU 與 RAM 是 **分開依照自己的主機規格選擇**。例如主機有 32 GB RAM、12 個邏輯處理器，則設定為 **16 GB RAM + 8 vCPU**。
+> vCPU 並不是越多越快。VirtualBox 仍需要由 Windows 主機排程虛擬 CPU；一般課程工作先以 **8 GB RAM + 4～6 vCPU** 為基準即可。
 
 > [!WARNING]
 > 不要把 Windows 主機的 CPU / RAM 全部分配給虛擬機。如果 VirtualBox 的資源配置指示進入紅色區域，請降低 vCPU 或記憶體設定，讓 Windows 主機本身保留足夠資源。
@@ -238,16 +242,26 @@ Ubuntu 22.04
 
 ### 7.1 系統（System）
 
-再次依照第 5 節的硬體對照表確認 CPU 與記憶體設定。
-
-例如：
+再次依照第 5 節確認 CPU 與記憶體。一般建議：
 
 ```text
-Windows 主機：32 GB RAM + 16 個以上邏輯處理器
-VirtualBox：  16384 MB（16 GB）+ 10 vCPU
+RAM：8192 MB
+CPU：4～6 vCPU
 ```
 
-若 VirtualBox 顯示資源配置進入紅色區域，請降低設定，不要勉強使用較高的 vCPU / RAM。
+若 VirtualBox 顯示資源配置進入紅色區域，請降低設定。
+
+### 7.2 顯示（Display）
+
+後續課程會使用 Gazebo 與 RViz，請確認：
+
+```text
+Video Memory：128 MB
+Graphics Controller：VMSVGA
+Enable 3D Acceleration：開啟
+```
+
+顯示記憶體過低或 3D 加速未正常工作，可能造成 Ubuntu 桌面、RViz 或 Gazebo 明顯卡頓。
 
 確認完成後即可繼續 Ubuntu 安裝。
 
@@ -427,8 +441,18 @@ sudo apt install -y build-essential dkms linux-headers-$(uname -r)
 sudo reboot
 ```
 
+安裝完成並重新啟動後，如果需要 Windows 與 Ubuntu 互相複製文字，可在 VirtualBox 虛擬機視窗選擇：
+
+```text
+裝置（Devices）
+└── 共用剪貼簿（Shared Clipboard）
+    └── 雙向（Bidirectional）
+```
+
+若「共用剪貼簿」已設為雙向但仍無法複製貼上，通常要先確認 Guest Additions 是否正常安裝；請參考 [Ubuntu VirtualBox 常見問題排除指南](Ubuntu_VirtualBox常見問題排除指南.md)。
+
 > [!NOTE]
-> Guest Additions 的畫面可能因 VirtualBox 版本略有不同。若目前 Ubuntu 顯示與操作皆正常，也可以先完成本章，其餘顯示整合問題再依課堂說明處理。
+> Guest Additions 的畫面可能因 VirtualBox 版本略有不同。
 
 ---
 
