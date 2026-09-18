@@ -114,16 +114,22 @@ code --version
 
 ---
 
-## 6. 設定 UTF-8 Locale
+## 5. 設定 UTF-8 Locale
 
 ```bash
 sudo apt update
 sudo apt install -y locales
-sudo locale-gen en_US en_US.UTF-8
-sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-export LANG=en_US.UTF-8
+sudo locale-gen en_US.UTF-8
+sudo update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
+```
+
+重新登入 Terminal 後確認：
+
+```bash
 locale
 ```
+
+`LANG` 應顯示 `en_US.UTF-8`。若 Terminal 因 Locale 錯誤完全無法開啟，請參考 [Ubuntu VirtualBox 常見問題排除指南](Ubuntu_VirtualBox常見問題排除指南.md)。
 
 ---
 
