@@ -13,14 +13,14 @@
 
 ```text
 ~/
-├── mobile-robotics-course/     ← 老師教材 Git Repository
+├── mobile-robotics-course/     ← 課程教材 Git Repository
 ├── turtlebot3_ws/              ← TurtleBot3 第三方套件 Workspace
 └── mobile_robotics_ws/         ← 學生自己的 ROS 2 Workspace
 ```
 
 | 路徑 | 用途 | 學生平常是否修改 |
 | --- | --- | --- |
-| `~/mobile-robotics-course` | 老師發布教材 | 不修改，只 `git pull` |
+| `~/mobile-robotics-course` | 課程發布教材 | 不修改，只 `git pull` |
 | `~/turtlebot3_ws` | TurtleBot3 source 與 simulation | 原則上不修改 |
 | `~/mobile_robotics_ws` | HW、Lab、自己的 ROS 2 package | **主要工作區** |
 
@@ -31,7 +31,7 @@ ROS 2 Humble 本身安裝在 `/opt/ros/humble/`，最後形成：
        ↓
 ~/turtlebot3_ws
        ↓
-~/mobile_robototics_ws
+~/mobile_robotics_ws
 ```
 
 ---
@@ -85,7 +85,36 @@ terminator --version
 
 ---
 
-## 4. 設定 UTF-8 Locale
+## 4. 安裝 Visual Studio Code
+
+本課程後續會使用 **Visual Studio Code（VS Code）** 撰寫 Python 與 ROS 2 程式。
+
+Ubuntu 中可直接使用 Snap 安裝：
+
+```bash
+sudo snap install --classic code
+```
+
+安裝完成後啟動：
+
+```bash
+code
+```
+
+確認版本：
+
+```bash
+code --version
+```
+
+如果可以正常開啟 VS Code 視窗，即代表安裝完成。
+
+> [!NOTE]
+> 這一階段只先把 VS Code 安裝好。後續課程開始建立 ROS 2 Python package 時，再介紹如何使用 VS Code 開啟 `~/mobile_robotics_ws`、編輯程式與使用 Terminal。
+
+---
+
+## 6. 設定 UTF-8 Locale
 
 ```bash
 sudo apt update
@@ -98,7 +127,7 @@ locale
 
 ---
 
-## 5. 啟用 Ubuntu Universe Repository
+## 6. 啟用 Ubuntu Universe Repository
 
 ```bash
 sudo apt install -y software-properties-common
@@ -107,23 +136,23 @@ sudo add-apt-repository -y universe
 
 ---
 
-## 6. 設定 ROS 2 APT Repository
+## 7. 設定 ROS 2 APT Repository
 
 目前 ROS 2 官方建議使用 **`ros2-apt-source` package** 管理 repository 與 signing key。本課程不再手動建立 `/etc/apt/sources.list.d/ros2.list`。
 
 > [!IMPORTANT]
 > 不要另外照舊教學手動建立 `ros2.list`。如果同時存在 `ros2.sources` 與另一份指向相同 ROS repository、但使用不同 `Signed-By` 的設定，`apt` 可能出現 `Conflicting values set for option Signed-By`。
 
-### 6.1 先檢查是否已經有 ROS 2 repository
+### 7.1 先檢查是否已經有 ROS 2 repository
 
 ```bash
 ls -l /etc/apt/sources.list.d/ros2.sources 2>/dev/null || true
 dpkg -l | grep ros2-apt-source || true
 ```
 
-如果已經看到 `ros2.sources`，而且 `ros2-apt-source` 已安裝，**不要再建立第二份 ROS repository**，直接進到第 6.3 節。
+如果已經看到 `ros2.sources`，而且 `ros2-apt-source` 已安裝，**不要再建立第二份 ROS repository**，直接進到第 7.3 節。
 
-### 6.2 尚未安裝時，使用官方 ros2-apt-source
+### 7.2 尚未安裝時，使用官方 ros2-apt-source
 
 ```bash
 sudo apt update
@@ -137,7 +166,7 @@ curl -L -o /tmp/ros2-apt-source.deb \
 sudo dpkg -i /tmp/ros2-apt-source.deb
 ```
 
-### 6.3 確認 repository 後更新 APT
+### 7.3 確認 repository 後更新 APT
 
 ```bash
 ls -l /etc/apt/sources.list.d/ros2.sources
@@ -152,11 +181,11 @@ grep -Rni "packages.ros.org/ros2/ubuntu" \
   /etc/apt/sources.list.d/ 2>/dev/null
 ```
 
-若你曾依舊版教材建立 `/etc/apt/sources.list.d/ros2.list`，而系統同時已有由 `ros2-apt-source` 管理的 `ros2.sources`，請先向教師 / TA 確認後再移除舊的重複設定。
+若你曾依舊版教材建立 `/etc/apt/sources.list.d/ros2.list`，而系統同時已有由 `ros2-apt-source` 管理的 `ros2.sources`，請先向助教 確認後再移除舊的重複設定。
 
 ---
 
-## 7. 安裝 ROS 2 Humble Desktop、Demo Nodes 與開發工具
+## 8. 安裝 ROS 2 Humble Desktop、Demo Nodes 與開發工具
 
 ```bash
 sudo apt update
@@ -181,7 +210,7 @@ dpkg -l | grep ros-humble-demo-nodes
 
 ---
 
-## 8. 載入 ROS 2 環境
+## 9. 載入 ROS 2 環境
 
 ```bash
 source /opt/ros/humble/setup.bash
@@ -199,7 +228,7 @@ grep -qxF 'source /opt/ros/humble/setup.bash' ~/.bashrc || \
 
 ---
 
-## 9. 初始化 rosdep
+## 10. 初始化 rosdep
 
 ```bash
 sudo rosdep init
@@ -210,7 +239,7 @@ rosdep update
 
 ---
 
-## 10. ROS 2 基本測試
+## 11. ROS 2 基本測試
 
 先確認兩個 demo package 都存在：
 
@@ -261,7 +290,7 @@ source /opt/ros/humble/setup.bash
 
 # 課程共用套件
 
-## 11. 安裝 Gazebo Classic / Gazebo 11
+## 12. 安裝 Gazebo Classic / Gazebo 11
 
 ```bash
 sudo apt update
@@ -295,7 +324,7 @@ grep -qxF 'source /usr/share/gazebo/setup.bash' ~/.bashrc || \
 
 ---
 
-## 12. 安裝 Turtlesim
+## 13. 安裝 Turtlesim
 
 ```bash
 sudo apt install -y ros-humble-turtlesim
@@ -306,7 +335,7 @@ ros2 pkg list | grep turtlesim
 
 ---
 
-## 13. 安裝 Navigation2 / Nav2
+## 14. 安裝 Navigation2 / Nav2
 
 ```bash
 sudo apt install -y \
@@ -318,7 +347,7 @@ ros2 pkg list | grep nav2_bringup
 
 ---
 
-## 14. 安裝 SLAM Toolbox
+## 15. 安裝 SLAM Toolbox
 
 ```bash
 sudo apt install -y ros-humble-slam-toolbox
@@ -331,7 +360,7 @@ ros2 pkg list | grep slam_toolbox
 
 # TurtleBot3 第三方環境
 
-## 15. 建立 TurtleBot3 Workspace
+## 16. 建立 TurtleBot3 Workspace
 
 ```bash
 cd ~
@@ -341,7 +370,7 @@ cd ~/turtlebot3_ws/src
 
 ---
 
-## 16. 下載 TurtleBot3 核心套件
+## 17. 下載 TurtleBot3 核心套件
 
 ```bash
 git clone -b humble https://github.com/ROBOTIS-GIT/DynamixelSDK.git
@@ -357,7 +386,7 @@ ls ~/turtlebot3_ws/src
 
 ---
 
-## 17. 安裝 TurtleBot3 相依套件
+## 18. 安裝 TurtleBot3 相依套件
 
 ```bash
 cd ~/turtlebot3_ws
@@ -366,7 +395,7 @@ rosdep install --from-paths src --ignore-src -r -y
 
 ---
 
-## 18. Build TurtleBot3 Workspace
+## 19. Build TurtleBot3 Workspace
 
 ```bash
 cd ~/turtlebot3_ws
@@ -382,7 +411,7 @@ ros2 pkg list | grep turtlebot3
 
 ---
 
-## 19. 安裝 TurtleBot3 Simulation
+## 20. 安裝 TurtleBot3 Simulation
 
 ```bash
 cd ~/turtlebot3_ws/src
@@ -402,7 +431,7 @@ ros2 pkg list | grep turtlebot3_gazebo
 
 ---
 
-## 20. 設定 TurtleBot3 環境
+## 21. 設定 TurtleBot3 環境
 
 **確認 workspace 已 build 成功後**才加入 `.bashrc`：
 
@@ -418,7 +447,7 @@ grep -qxF 'export TURTLEBOT3_MODEL=burger' ~/.bashrc || \
 
 # 學生自己的 ROS 2 Workspace
 
-## 21. 建立整學期唯一的學生 Workspace
+## 22. 建立整學期唯一的學生 Workspace
 
 ```bash
 cd ~
@@ -440,7 +469,7 @@ colcon build --symlink-install
 
 ---
 
-## 22. 設定學生 Workspace 自動載入
+## 23. 設定學生 Workspace 自動載入
 
 確認：
 
@@ -468,7 +497,7 @@ export TURTLEBOT3_MODEL=burger
 
 ---
 
-## 23. 啟動 TurtleBot3 Simulation 測試
+## 24. 啟動 TurtleBot3 Simulation 測試
 
 先確認目前 Terminal 已載入完整課程環境：
 
@@ -492,7 +521,7 @@ ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
 
 ---
 
-## 24. 課程環境完整檢查
+## 25. 課程環境完整檢查
 
 ```bash
 cd ~/mobile-robotics-course
@@ -502,7 +531,7 @@ bash scripts/environment_check.sh
 
 ---
 
-## 25. 完成後的完整目錄
+## 26. 完成後的完整目錄
 
 ```text
 ~/
@@ -524,10 +553,11 @@ bash scripts/environment_check.sh
 
 ---
 
-## 26. 手動檢查清單
+## 27. 手動檢查清單
 
 - [ ] Ubuntu 22.04
 - [ ] Terminator
+- [ ] Visual Studio Code（VS Code）
 - [ ] ROS 2 Humble
 - [ ] `demo_nodes_cpp`
 - [ ] `demo_nodes_py`
@@ -545,7 +575,7 @@ bash scripts/environment_check.sh
 
 ---
 
-## 27. 常見問題
+## 28. 常見問題
 
 ### Q1：`ros2: command not found`
 
@@ -563,7 +593,7 @@ grep -Rni "packages.ros.org/ros2/ubuntu" \
   /etc/apt/sources.list.d/ 2>/dev/null
 ```
 
-如果同時看到 `ros2.sources` 與手動建立的 `ros2.list`，請不要再新增 repository；先向教師 / TA 確認哪一份是舊設定。
+如果同時看到 `ros2.sources` 與手動建立的 `ros2.list`，請不要再新增 repository；先向助教 確認哪一份是舊設定。
 
 ### Q3：`Package 'demo_nodes_py' not found`
 
@@ -613,7 +643,7 @@ VirtualBox 請確認：VMSVGA、128 MB Video Memory、3D Acceleration ON，並�
 
 ---
 
-## 28. 為什麼不用一鍵安裝 Script？
+## 29. 為什麼不用一鍵安裝 Script？
 
 本課程刻意讓學生親自使用：
 
