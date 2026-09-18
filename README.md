@@ -166,9 +166,6 @@ mobile-robotics-course/
 └── scripts/
     └── environment_check.sh
 ```
-
-不希望學生看到的解答、評分工具、教師測試程式與尚未公開內容，不會放入此 Public Repository。
-
 ---
 
 ## 建議電腦規格
