@@ -420,6 +420,7 @@ grep -qxF 'export TURTLEBOT3_MODEL=burger' ~/.bashrc || \
 ## 21. 建立整學期唯一的學生 Workspace
 
 ```bash
+cd ~
 mkdir -p ~/mobile_robotics_ws/src
 cd ~/mobile_robotics_ws
 colcon build --symlink-install
